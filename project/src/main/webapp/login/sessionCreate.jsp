@@ -12,8 +12,7 @@
 	<img src = "per.jpg" width = "100" height = "150">
 	<br>
 	
-	<form name = 'loginForm' action = 'sessionCreate_success.jsp' 
-	method = "post">
+	<form name = 'loginForm' action = 'http://127.0.0.1:5000/login' method = "post">
 	아이디: <br>
 	<input type = "text" name = "id"> <br><br>
 	비밀번호: <br> 

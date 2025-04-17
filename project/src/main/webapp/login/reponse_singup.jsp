@@ -16,7 +16,7 @@
       }
 
       // 모든 필수 입력 항목이 비어 있지 않은지 확인
-      const requiredFields = ["userId", "name", "password", "passwordCheck", "phone", "guardianName", "guardianPhone"];
+      const requiredFields = ["userId", "name", "password", "passwordCheck", "phone", "email", "guardianPhone"];
       for (let field of requiredFields) {
         if (document.getElementById(field).value.trim() === "") {
           alert("모든 항목을 입력해주세요.");
@@ -31,13 +31,13 @@
 </head>
 <body>
   <h2>회원가입</h2>
-  <form method="post" action="sessionCreate.jsp" onsubmit="return validateForm();">
+  <form method="post" action="http://127.0.0.1:5000/register" onsubmit="return validateForm();">
     <label>아이디: <input type="text" id="userId" name="userId"></label><br><br>
     <label>이름: <input type="text" id="name" name="name"></label><br><br>
     <label>비밀번호: <input type="password" id="password" name="password"></label><br><br>
     <label>비밀번호 확인: <input type="password" id="passwordCheck" name="passwordCheck"></label><br><br>
     <label>전화번호: <input type="text" id="phone" name="phone"></label><br><br>
-    <label>보호자 이름: <input type="text" id="guardianName" name="guardianName"></label><br><br>
+    <label>이메일: <input type="text" id="email" name="email"></label><br><br>
     <label>보호자 전화번호: <input type="text" id="guardianPhone" name="guardianPhone"></label><br><br>
 
     <input type="submit" value="회원가입">
