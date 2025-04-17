@@ -6,8 +6,8 @@ def check_login(ID, Passwd):
     db = client['Users']
     collection = db['Users']
 
-    # 사용자 정보 확인 (필드명 일치: "ID", "Passwd")
-    user = collection.find_one({'ID': ID, 'Passwd': Passwd})
+    # 사용자 정보 확인
+    user = collection.find_one({'ID': ID, 'password': Passwd})
     if user:
         return True
     else:
