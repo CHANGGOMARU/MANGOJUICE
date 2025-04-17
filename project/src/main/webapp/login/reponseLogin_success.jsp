@@ -22,7 +22,7 @@
         try {
             // 1. MongoDB 연결
             MongoClient mongoClient = MongoClients.create("mongodb://localhost:27017");
-            MongoDatabase database = mongoClient.getDatabase("yourDatabase"); // DB 이름
+            MongoDatabase database = mongoClient.getDatabase("Users"); // DB 이름
             MongoCollection<Document> collection = database.getCollection("users");
 
             // 2. 로그인한 사용자의 정보 가져오기
