@@ -37,14 +37,3 @@ def make_user(ID, Passwd, name, email, phone_number):
     else:
         return False
 
-
-'''
-# 사용 예시
-if __name__ == "__main__":
-    ID = input("ID: ")
-    Passwd = input("Passwd: ")
-    if check_login(ID, Passwd):
-        print("로그인 성공")
-    else:
-        print("로그인 실패")
-        '''
