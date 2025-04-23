@@ -13,7 +13,7 @@ torch.cuda.set_per_process_memory_fraction(0.25, device=0)
 
 #unsloth로 양자화한 모델이르모, unsloth 모델을 로딩함.
 from unsloth import FastLanguageModel
-max_memory = {"cuda:0": "8GiB"}
+max_memory = {"cuda:0": "3GiB"}
 
 #accelerate 모델로 12GB 가량의 큰 모델을 사용전 메모리를 효율적으로 분할하게 함.
 from accelerate import init_empty_weights, load_checkpoint_and_dispatch

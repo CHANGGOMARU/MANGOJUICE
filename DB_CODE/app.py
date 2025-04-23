@@ -5,10 +5,6 @@ import time
 app = Flask(__name__)
 
 
-login_attempts = {}
-MAX_ATTEMPTS = 5
-BLOCK_TIME = 5 * 60  # 5분 (초 단위)
-
 
 @app.route('/')
 def hello_world():
