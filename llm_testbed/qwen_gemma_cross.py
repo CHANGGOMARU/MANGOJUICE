@@ -8,12 +8,13 @@ import os
 
 
 #메모리 관리
+'''
 _total_mem = torch.cuda.get_device_properties(0).total_memory
 _target_vram = 6 * 1024 ** 3  # 6 GiB
 _fraction = _target_vram / _total_mem
 torch.cuda.set_per_process_memory_fraction(_fraction, device=0)
 max_memory = {"cuda:0": "6GiB"}
-
+'''
 
 #모델명
 qwen_name = "unsloth/Qwen2.5-VL-3B-Instruct-bnb-4bit"

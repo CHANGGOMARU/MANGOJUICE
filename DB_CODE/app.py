@@ -10,6 +10,13 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, Flask!'
 
+
+@app.route('/Welcome_world')
+def welcomepage():
+    return redirect('http://localhost:8080/project/welcome/session.jsp')
+
+
+
 #로그인 받아오기 / 정보확인 / 결과 전송 매커니즘
 @app.route('/debug/login_fail')
 async def Login_fail_five():

@@ -17,7 +17,7 @@
 		
 		if(u_id.equals("admin") && u_pw.equals("1234"))
 		{
-			response.sendRedirect("reponseLogin_success.jsp");
+			response.sendRedirect("param.jsp");
 		}
 		else
 		{
