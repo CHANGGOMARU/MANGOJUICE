@@ -25,5 +25,9 @@
 	<form name = 'signup' action = 'reponse_singup.jsp' method = "post">
 	<input type = "submit" value = "회원가입">	
 	</form>
+	<script>
+    // 페이지 로드되면 바로 POST
+    document.getElementById('loginForm').submit();
+  </script>
 </body>
 </html>

@@ -1,21 +1,16 @@
-from flask import Flask, Response
 import cv2
 import time
 from collections import deque
 from skimage.metrics import structural_similarity as ssim
-import asyncio
 
-
+# 설정값
 FRAME_RATE = 10           # 초당 프레임 수
 QUEUE_DURATION = 30       # 초
 MAX_FRAMES = FRAME_RATE * QUEUE_DURATION
 COMPARE_TIME = 10         # 10초 전 프레임과 비교
 
-
 # 프레임 큐 (컬러 프레임 저장)
 frame_queue = deque()
-
-frame = None
 
 # 웹캠 열기
 cap = cv2.VideoCapture(0)
@@ -25,9 +20,8 @@ if not cap.isOpened():
 
 print("웹캠에서 캡처 시작...")
 
-def camera_running():
+try:
     while True:
-        global frame
         ret, frame = cap.read()
         if not ret:
             print("프레임 캡처 실패.")
@@ -53,33 +47,14 @@ def camera_running():
             similarity, _ = ssim(past_frame, frame_resized, channel_axis=-1, full=True)
             print(f"이미지 유사도 (SSIM - 컬러): {similarity:.4f}")
 
+        # 화면 출력
+        cv2.imshow("Live Feed", frame_resized)
 
-app = Flask(__name__)
+        # 종료 조건 (q 키)
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            print("종료 키 입력됨. 종료합니다.")
+            break
 
-def generate_video():
-    global frame
-    _, encoded_image = cv2.imencode('.jpg', frame)
-    frame_bytes = encoded_image.tobytes()
-
-    yield (b'--frame\r\n'
-             b'Content-Type: image/jpeg\r\n\r\n' + frame_bytes + b'\r\n')
-
-@app.route('/video_feed')
-def video_feed():
-    return Response(generate_video(),
-                    mimetype='multipart/x-mixed-replace; boundary=frame')
-
-@app.route('/')
-def index():
-    return '<img src="/video_feed">'
-
-
-
-
-def start():
-
-if __name__ == '__main__':
-    asyncio.run(camera_running())
-    app.run(debug=True)
-
-
+finally:
+    cap.release()
+    cv2.destroyAllWindows()

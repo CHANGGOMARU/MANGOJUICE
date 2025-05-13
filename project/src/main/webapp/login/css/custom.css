@@ -1,0 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=NanumPenScript.css);
+@import url(https://fonts.googleapis.com/css?family=Jua.css);
+.navbar -brand h1, h2, h3, h4{
+	font-family: 'jua';
+}
+
+h5 {
+	font-family: 'jua';
+	font-size: 18px;
+}
+
+body{
+	font-family: 'NanumPenScript';
+}
