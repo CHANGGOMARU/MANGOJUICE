@@ -112,24 +112,62 @@
                 int pwStart = payloadJson.indexOf("\"passwd\":\"") + 10;
                 int pwEnd   = payloadJson.indexOf("\"", pwStart);
                 String userPw = payloadJson.substring(pwStart, pwEnd);
+
+                int emailStart = payloadJson.indexOf("\"email\":\"") + 9;
+                int emailEnd   = payloadJson.indexOf("\"", emailStart);
+                String useremail = payloadJson.substring(emailStart, emailEnd);
+
+                int pnStart = payloadJson.indexOf("\"phone_number\":\"") + 16;
+                int pnEnd   = payloadJson.indexOf("\"", pnStart);
+                String userPn = payloadJson.substring(pnStart, pnEnd);
+
+                int ageStart = payloadJson.indexOf("\"age\":\"") + 7;
+                int ageEnd   = payloadJson.indexOf("\"", ageStart);
+                String userage = payloadJson.substring(ageStart, ageEnd);
+
+                int nameStart = payloadJson.indexOf("\"name\":\"") + 8;
+                int nameEnd   = payloadJson.indexOf("\"", nameStart);
+                String username = payloadJson.substring(nameStart, nameEnd);
                 
                 
                 Cookie idCookie = new Cookie("userId", userId);
                 Cookie pwCookie = new Cookie("userPw", userPw);
+                Cookie emailCookie = new Cookie("useremail", useremail);
+                Cookie pnCookie = new Cookie("userPn", userPn);
+                Cookie ageCookie = new Cookie("userage", userage);
+                Cookie nameCookie = new Cookie("username", URLEncoder.encode(username, StandardCharsets.UTF_8.toString()));
 
                 // 쿠키 설정 (예: 유효기간 1일, 경로 설정)
                 idCookie.setMaxAge(60 * 60 * 24); // 1일
                 pwCookie.setMaxAge(60 * 60 * 24);
+                emailCookie.setMaxAge(60 * 60 * 24);
+                pnCookie.setMaxAge(60 * 60 * 24);
+                ageCookie.setMaxAge(60 * 60 * 24);
+                nameCookie.setMaxAge(60 * 60 * 24);
 
                 idCookie.setPath("/"); // 전체 경로에서 쿠키 사용 가능
                 pwCookie.setPath("/");
+                emailCookie.setPath("/");
+                pnCookie.setPath("/");
+                ageCookie.setPath("/");
+                nameCookie.setPath("/");
 
                 // 응답에 쿠키 추가
                 response.addCookie(idCookie);
                 response.addCookie(pwCookie);
+                response.addCookie(emailCookie);
+                response.addCookie(pnCookie);
+                response.addCookie(ageCookie);
+                response.addCookie(nameCookie);
+
                 
                 // 세션에 사용자 정보 저장 (필요에 따라 사용)
                 session.setAttribute("userId", userId);
+                session.setAttribute("userPw", userPw);
+                session.setAttribute("username", username);
+                session.setAttribute("userpn", userPn);
+                session.setAttribute("userage", userage);
+                session.setAttribute("useremail", useremail);
             }
         }
 

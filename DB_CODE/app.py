@@ -54,6 +54,10 @@ async def Login():
         'id': user_infomation['ID'],
         'passwd' : user_infomation['Passwd'],
         'name' : user_infomation['name'],
+        'age' : user_infomation['age'],
+        'name' : user_infomation['name'],
+        'email' : user_infomation['email'],
+        'phone_number' : user_infomation['phone_number'],
         'exp': datetime.datetime.utcnow() + datetime.timedelta(hours=1),
         'iat': datetime.datetime.utcnow(),
         'iss': 'flask-server'

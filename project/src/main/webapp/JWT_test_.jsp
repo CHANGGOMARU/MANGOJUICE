@@ -46,8 +46,29 @@
                 int pwEnd   = payloadJson.indexOf("\"", pwStart);
                 String userPw = payloadJson.substring(pwStart, pwEnd);
                 
+                int nameStart = payloadJson.indexOf("\"name\":\"") + 10;
+                int nameEnd   = payloadJson.indexOf("\"", nameStart);
+                String username = payloadJson.substring(nameStart, nameEnd);
+
+                int emialStart = payloadJson.indexOf("\"email\":\"") + 10;
+                int emailEnd   = payloadJson.indexOf("\"", emailStart);
+                String userPw = payloadJson.substring(emailStart, emailEnd);
+
+                int pnStart = payloadJson.indexOf("\"phone_number\":\"") + 10;
+                int pnEnd   = payloadJson.indexOf("\"", pnStart);
+                String userPn = payloadJson.substring(pnStart, pnEnd);
+
+                int ageStart = payloadJson.indexOf("\"age\":\"") + 10;
+                int ageEnd   = payloadJson.indexOf("\"", emailStart);
+                String userage = payloadJson.substring(ageStart, ageEnd);
+                
                 // 세션에 사용자 정보 저장 (필요에 따라 사용)
                 session.setAttribute("userId", userId);
+                session.setAttribute("userPw", userPw);
+                session.setAttribute("username", username);
+                session.setAttribute("userpn", userpn);
+                session.setAttribute("userage", userage);
+
             }
         }
 

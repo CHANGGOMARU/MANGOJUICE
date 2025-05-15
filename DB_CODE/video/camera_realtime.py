@@ -9,7 +9,7 @@ import asyncio
 FRAME_RATE = 10           # 초당 프레임 수
 QUEUE_DURATION = 30       # 초
 MAX_FRAMES = FRAME_RATE * QUEUE_DURATION
-COMPARE_TIME = 10         # 10초 전 프레임과 비교
+COMPARE_TIME = 10        # 10초 전 프레임과 비교
 
 
 # 프레임 큐 (컬러 프레임 저장)
@@ -75,8 +75,6 @@ def index():
 
 
 
-
-def start():
 
 if __name__ == '__main__':
     asyncio.run(camera_running())

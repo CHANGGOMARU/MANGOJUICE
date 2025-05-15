@@ -86,13 +86,33 @@
 Cookie[] cookies = request.getCookies();
 String userId = null;
 String userPw = null;
+String userage = null;
+String username = null;
+String userpn = null;
+String useremail = null;
 
 if (cookies != null) {
     for (Cookie cookie : cookies) {
         if ("userId".equals(cookie.getName())) {
             userId = cookie.getValue();
-        } else if ("userPw".equals(cookie.getName())) {
+        }
+        if ("userPw".equals(cookie.getName())) {
             userPw = cookie.getValue();
+        }
+        if ("userage".equals(cookie.getName())) {
+            userage = cookie.getValue();
+        }
+        if ("username".equals(cookie.getName())) {
+            username = cookie.getValue();
+        }
+        if ("userpn".equals(cookie.getName())) {
+            userpn = cookie.getValue();
+        }
+        if ("useremail".equals(cookie.getName())) {
+            useremail = cookie.getValue();
+        }
+        if ("username".equals(cookie.getName())) {
+            username = cookie.getValue();
         }
     }
 }
@@ -105,16 +125,15 @@ if (cookies != null) {
     </label><br>
 
     <label>이름: 
-        <input type="text" name="name" required>
+        <input type="text" name="name" value=<%= username %> required>
     </label><br>
 
     <label>나이: 
-        <input type="number" name="age" required>
+        <input type="number" name="age" value=<%= userage %> required>
     </label><br>
 
     <label>비밀번호: 
-        <input type="password" name="password" 
-               value=<%= userPw %> " 
+        <input type="password" name="password"
                required>
     </label><br>
 
@@ -123,7 +142,7 @@ if (cookies != null) {
     </label><br>
 
     <label>전화번호: 
-        <input type="text" name="phone" required>
+        <input type="text" name="phone" value=<%= userpn %> required>
     </label><br>
 
     <hr>
