@@ -103,16 +103,36 @@ if (cookies != null) {
             userage = cookie.getValue();
         }
         if ("username".equals(cookie.getName())) {
-            username = cookie.getValue();
+            String rawValue = cookie.getValue();
+            try {
+                rawValue = URLDecoder.decode(rawValue, "UTF-8");
+                
+                if (rawValue.contains("\\u")) {
+                    StringBuilder sb = new StringBuilder();
+                    int i = 0;
+                    while (i < rawValue.length()) {
+                        if (i + 5 < rawValue.length() && rawValue.substring(i, i + 2).equals("\\u")) {
+                            int hexValue = Integer.parseInt(rawValue.substring(i + 2, i + 6), 16);
+                            sb.append((char) hexValue);
+                            i += 6;
+                        } else {
+                            sb.append(rawValue.charAt(i));
+                            i++;
+                        }
+                    }
+                    username = sb.toString();
+                } else {
+                    username = rawValue;
+                }
+            } catch (Exception e) {
+                username = rawValue;
+            }
         }
         if ("userpn".equals(cookie.getName())) {
             userpn = cookie.getValue();
         }
         if ("useremail".equals(cookie.getName())) {
             useremail = cookie.getValue();
-        }
-        if ("username".equals(cookie.getName())) {
-            username = cookie.getValue();
         }
     }
 }

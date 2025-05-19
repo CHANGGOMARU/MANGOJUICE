@@ -48,7 +48,7 @@ async def Login():
         user_infomation = get_user_info(ID,Passwd)
 
 
-        
+        print(user_infomation['name'])
 
         payload = {
         'id': user_infomation['ID'],
