@@ -1,8 +1,15 @@
 {
-  "mcpServers": {
-    "browsermcp": {
+  "servers": {
+    "browser-mcp": {
+      "type": "stdio",
       "command": "npx",
-      "args": ["@browsermcp/mcp@latest"]
+      "args": [
+        "-y",
+        "@browsermcp/mcp"
+      ],
+      "env": {
+        "PORT": "9002"
+      }
     }
   }
 }
