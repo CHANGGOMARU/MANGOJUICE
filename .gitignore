@@ -8,3 +8,4 @@ llm_testbed/Qwen2.5-VL-3B-Instruct-q4_0.gguf
 README.md
 *.gguf
 *.safetensors
+*.whl
