@@ -61,9 +61,9 @@ messages_list = [
 a = 1
 
 for frame in extracted_video:
-     messages_list[0][split("content")].append(str(a)+" frame")
+     messages_list[0][split("content")] = str(a)+" frame"
      a =+ 1
-     messages_list[0][split("images")].append(resize_image(frame))
+     messages_list[0][split("images")] = resize_image(frame)
 
 
 response: ChatResponse = chat(model='gemma3:4b-it-qat', messages=messages_list)
