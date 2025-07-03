@@ -61,9 +61,9 @@ messages_list = [
 a = 1
 
 for frame in extracted_video:
-     messages_list[0][split("content")] = str(a)+" frame"
+     messages_list[0][split("content")].append(str(a)+" frame")
      a =+ 1
-     messages_list[0][split("images")] = resize_image(frame)
+     messages_list[0][split("images")].append(resize_image(frame))
 
 
 response: ChatResponse = chat(model='gemma3:4b-it-qat', messages=messages_list)
@@ -93,3 +93,49 @@ print(response.message.content)
 sec = (end - start)
 result = datetime.timedelta(seconds=sec)
 print(str(result) + "초")
+
+
+def roll_fallAssistant():
+    messages_list = [
+    {
+        "role": "system",  
+        "content": "Don't output any reasons and whys.",
+        "role": "user",  
+        "content": "Is the person in the video falling or in a dangerous situation? Treat falls on fluffy objects, such as mats, as dangerous. Don't output any reasons and whys.",   
+    }
+    ]
+    a = 1
+
+    for frame in extracted_video:
+        messages_list[0][split("content")] = str(a)+" frame"
+        a =+ 1
+        messages_list[0][split("images")] = resize_image(frame)
+
+
+    response: ChatResponse = chat(model='gemma3:4b-it-qat', messages=messages_list)
+    
+    end = time.time()
+
+    print(response.message.content)
+    sec = (end - start)
+    result = datetime.timedelta(seconds=sec)
+    print(str(result) + "초")
+
+
+
+    messages_list[0][split("role")] = "assistant"
+    messages_list[0][split("content")] = response.message.content
+
+
+    messages_list[0][split("role")] = "user"
+    messages_list[0][split("content")] = "Let's double-check. Is this a potentially dangerous situation?"
+
+    #print(messages)
+
+    response: ChatResponse = chat(model='gemma3:4b-it-qat', messages=messages_list)
+    end = time.time()
+
+    print(response.message.content)
+    sec = (end - start)
+    result = datetime.timedelta(seconds=sec)
+    print(str(result) + "초")
