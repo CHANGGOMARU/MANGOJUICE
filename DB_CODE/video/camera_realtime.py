@@ -7,7 +7,6 @@ import asyncio
 import threading
 import os
 import datetime
-from Gemma3_ollama import roll_fallAssistant  # Gemma3_ollama.py의 함수 임포트
 
 
 FRAME_RATE = 30           # 초당 프레임 수
@@ -131,19 +130,7 @@ def camera_running():
                 last_save_time = current_time
 
 
-def start_asyncio_loop(loop):
-    asyncio.set_event_loop(loop)
-    loop.run_until_complete(gemma3_periodic_runner())
-
-async def gemma3_periodic_runner():
-    while True:
-        try:
-            print("[Gemma3] 30초마다 분석 실행...")
-            roll_fallAssistant()
-        except Exception as e:
-            print(f"[Gemma3] 오류 발생: {e}")
-        await asyncio.sleep(30)
-
+    
 
 app = Flask(__name__)
 
@@ -172,11 +159,6 @@ def start_flask():
 if __name__ == '__main__':
     flask_thread = threading.Thread(target=start_flask)
     flask_thread.start()
-
-    # asyncio 루프를 별도 스레드에서 실행
-    gemma_loop = asyncio.new_event_loop()
-    gemma_thread = threading.Thread(target=start_asyncio_loop, args=(gemma_loop,), daemon=True)
-    gemma_thread.start()
 
     camera_running()
 
