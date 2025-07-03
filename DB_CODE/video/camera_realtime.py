@@ -7,6 +7,11 @@ import asyncio
 import threading
 import os
 import datetime
+from ollama import chat
+from ollama import ChatResponse
+import os
+from PIL import Image
+import numpy as np
 
 
 FRAME_RATE = 30           # 초당 프레임 수
@@ -66,6 +71,7 @@ def noact_check(secondact):
     print(f"\r 같은 프레임 감지 시간: {secondact}초", end="")
     if secondact > 60:
         print("\r \n 일분 이상 움직임 미감지!!!", end="")
+        fall_Assistant(Send_frame)
 
 
 secondact = 0
@@ -129,7 +135,48 @@ def camera_running():
                 
                 last_save_time = current_time
 
+def fall_Assistant(extracted_video):
+    messages_list = [
+    {
+        "role": "system",  
+        "content": "Don't output any reasons and whys.",
+        "role": "user",  
+        "content": "Describe the video concisely.",   
+    }
+    ]
+    a = 1
 
+    for frame in extracted_video:
+        messages_list[0][split("content")] = str(a)+" frame"
+        a =+ 1
+        messages_list[0][split("images")] = resize_image(frame)
+
+
+    response: ChatResponse = chat(model='gemma3:4b-it-qat', messages=messages_list)
+    
+    end = time.time()
+
+    print(response.message.content)
+    sec = (end - start)
+    result = datetime.timedelta(seconds=sec)
+    print(str(result) + "초")
+
+
+
+    messages_list[0][split("role")] = "assistant"
+    messages_list[0][split("content")] = response.message.content
+
+
+    messages_list[0][split("role")] = "user"
+    messages_list[0][split("content")] = "Let's double-check. Is this a potentially dangerous situation?"
+
+    #print(messages)
+
+    response: ChatResponse = chat(model='gemma3:4b-it-qat', messages=messages_list)
+    end = time.time()
+
+    print(response.message.content)
+    del messages_list
     
 
 app = Flask(__name__)
